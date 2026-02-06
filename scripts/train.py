@@ -155,7 +155,7 @@ def main():
                 y_train=y_train,
                 cv=cv,
                 random_state=random_state,
-                n_iter=18,
+                n_iter=12,
             )
         else:
             best_est = pipe.fit(X_train, y_train)
