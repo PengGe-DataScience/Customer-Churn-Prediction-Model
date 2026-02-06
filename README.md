@@ -4,7 +4,7 @@
 Customer churn is costly because replacing lost customers typically requires more marketing and acquisition spend than retaining existing customers.  
 This project builds a supervised machine learning model to **identify which customers are likely to churn** and to **explain the drivers behind churn**, enabling proactive retention strategies (targeted outreach, offers, product interventions).
 
-> Note: Originally created as an end-to-end ML pipeline case study in October 2025, this project has been refactored with updated dependencies, modular code, and improved documentation and reporting, and is now published as an open-source portfolio project.
+> Note: This repository was originally developed as an end-to-end ML case study in October 2025. It has since been updated with current libraries, an improved code structure, clearer documentation, and reproducible reports, and is now shared publicly.
 
 ## Dataset
 - Source: Kaggle — “Churn for Bank Customers”
