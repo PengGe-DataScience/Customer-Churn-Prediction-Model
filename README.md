@@ -83,6 +83,28 @@ The output includes:
 
 ## Insights & Recommendations
 
+## Model Performance
+
+### ROC Curve
+
+<img src="reports/figures/roc_curve.png" width="500">
+
+*ROC curve showing strong discrimination between churners and non-churners.*
+
+### Confusion Matrix (Threshold = 0.27)
+
+<img src="reports/figures/confusion_matrix.png" width="500">
+
+*Confusion matrix at the selected probability threshold, illustrating the precision–recall trade-off used for retention targeting.*
+
+## Model Interpretability
+
+### Key Drivers of Churn
+
+<img src="reports/figures/feature_importance.png" width="500">
+
+*Permutation feature importance highlighting key drivers of churn, including product count, age, balance, geography, and activity status.*
+
 ### Key Insights
 - **Churn is imbalanced (~20%)**, making Precision–Recall and risk-based targeting more informative than accuracy.
 - **Geographic differences are substantial**: customers in Germany show nearly **2× higher churn rate** than those in France or Spain, indicating strong regional effects.
