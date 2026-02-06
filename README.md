@@ -83,8 +83,6 @@ The output includes:
 
 ## Insights & Recommendations
 
-## Model Performance
-
 ### ROC Curve
 
 <img src="reports/figures/roc_curve.png" width="500">
@@ -97,7 +95,6 @@ The output includes:
 
 *Confusion matrix at the selected probability threshold, illustrating the precision–recall trade-off used for retention targeting.*
 
-## Model Interpretability
 
 ### Key Drivers of Churn
 
@@ -113,7 +110,7 @@ The output includes:
   - Customers with certain product counts (especially higher counts) show elevated churn risk.
 - **Engagement is critical**: inactive customers have a clearly higher probability of churn compared to active members.
 
-### Model Performance (Business View)
+### Model Performance
 - The selected Gradient Boosting model achieves strong ranking performance (ROC-AUC ≈ **0.87**, PR-AUC ≈ **0.73**).
 - Using a tuned probability threshold (~**0.27**) balances precision and recall:
   - **Recall ≈ 69%**: most churners are successfully identified.
