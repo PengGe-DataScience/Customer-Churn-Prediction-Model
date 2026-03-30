@@ -140,7 +140,7 @@ We evaluate a simple retention policy:
 
 For each targeted customer \( i \):
 
-EV_i = p_i \cdot s \cdot V - C
+EV_i = p_i × s × V − C
 
 Where:
 - \( p_i \): predicted churn probability from the model  
@@ -150,7 +150,7 @@ Where:
 
 Total expected profit:
 
-Total Profit = \sum_{i \in \text{targeted}} (p_i \cdot s \cdot V - C)
+Total Profit = Σ (p_i × s × V − C) over targeted customers
 
 ---
 
