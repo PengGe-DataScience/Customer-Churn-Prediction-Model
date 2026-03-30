@@ -126,3 +126,87 @@ The output includes:
   - Customers with high-risk product profiles
   - High-churn regions (e.g., Germany)
 - Integrate churn probabilities into CRM systems and rerun scoring periodically as customer behavior evolves.
+
+## Revenue Impact Simulation (Decision Layer)
+
+While the model predicts churn risk, business value comes from **acting on these predictions**. This section simulates the **expected revenue impact of targeted retention campaigns** under different assumptions and targeting strategies.
+
+### Framework
+
+We evaluate a simple retention policy:
+- Rank customers by predicted churn probability
+- Target the top *k%* (or top *N*) customers
+- Estimate expected revenue impact of intervention
+
+For each targeted customer \( i \):
+
+EV_i = p_i \cdot s \cdot V - C
+
+Where:
+- \( p_i \): predicted churn probability from the model  
+- \( s \): assumed **save rate** (probability an intervention prevents churn)  
+- \( V \): average customer value (e.g., annual revenue or lifetime value proxy)  
+- \( C \): cost of contacting the customer (campaign cost)
+
+Total expected profit:
+
+Total Profit = \sum_{i \in \text{targeted}} (p_i \cdot s \cdot V - C)
+
+---
+
+### Assumptions (Scenario-Based)
+
+Because this dataset does not include intervention outcomes, we simulate impact under **plausible business scenarios**:
+
+| Parameter | Baseline | Conservative | Optimistic |
+|----------|----------|--------------|------------|
+| Save rate (s) | 20% | 10% | 30% |
+| Customer value (V) | €200/year | €150 | €250 |
+| Contact cost (C) | €5 | €5 | €5 |
+
+> Note: The save rate is a **causal quantity** (effect of intervention). In real applications, this would be estimated via experiments or uplift modeling. Here, we use scenario assumptions to illustrate decision trade-offs.
+
+---
+
+### Targeting Strategies
+
+We evaluate different operational strategies:
+
+- **Top-k targeting**: contact top 5%, 10%, 20% highest-risk customers  
+- **Capacity-constrained targeting**: e.g., contact up to 1,000 customers  
+- **Threshold-based targeting**: contact all customers with \( p_i > t \)
+
+---
+
+### Example Insights (Illustrative)
+
+- Increasing targeting coverage raises recall but also increases cost  
+- There is typically an **optimal targeting size** where profit is maximized  
+- Even with moderate save rates (e.g., 10–20%), **risk-based targeting significantly outperforms random outreach**
+
+---
+
+### Practical Implementation
+
+After scoring customers:
+
+```python
+df = df.sort_values("churn_proba", ascending=False)
+
+# Example: target top 10%
+k = int(0.1 * len(df))
+df["target"] = 0
+df.iloc[:k, df.columns.get_loc("target")] = 1
+
+# Assumptions
+save_rate = 0.2
+value = 200
+cost = 5
+
+# Expected impact
+df["expected_saved"] = df["target"] * df["churn_proba"] * save_rate
+df["expected_revenue"] = df["expected_saved"] * value
+df["cost"] = df["target"] * cost
+
+total_profit = df["expected_revenue"].sum() - df["cost"].sum()
+```
